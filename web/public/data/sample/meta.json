@@ -1,0 +1,18 @@
+{
+  "generated_at": "2024-01-01T00:00:00Z",
+  "indicators": [
+    {
+      "id": "oxford_readiness.overall",
+      "name": "AI Readiness Score",
+      "description": "Overall Government AI Readiness score from Oxford Insights, combining Government, Technology Sector, and Data & Infrastructure pillars.",
+      "unit": "score_0_100",
+      "source": "oxford_readiness",
+      "methodology_url": "https://oxfordinsights.com/ai-readiness/",
+      "years_available": [2023],
+      "coverage_count": 35,
+      "scale_type": "sequential"
+    }
+  ],
+  "years": [2023],
+  "sources": ["oxford_readiness"]
+}
