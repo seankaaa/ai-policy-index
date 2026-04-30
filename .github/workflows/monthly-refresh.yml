@@ -1,0 +1,68 @@
+name: Monthly Dataset Refresh
+
+on:
+  schedule:
+    # 02:00 UTC on the 30th of every month
+    - cron: "0 2 30 * *"
+  workflow_dispatch:
+    inputs:
+      refresh:
+        description: "Force re-fetch (bypass cache)"
+        type: boolean
+        default: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run full pipeline
+        env:
+          REFRESH_FLAG: ${{ github.event.inputs.refresh == 'true' && '--refresh' || '' }}
+        run: |
+          set -e
+          for SOURCE in \
+            oxford_readiness \
+            oecd_ai \
+            girai \
+            stanford_hai \
+            aims_survey \
+            zhang_dafoe_govai \
+            kelley_8country \
+            world_risk_poll \
+            iapp_tracker \
+            pew_research \
+            unesco_ram \
+            ipsos_ai_monitor \
+            local_us_officials; do
+            echo "=== $SOURCE ==="
+            uv run python -m src.cli run $SOURCE $REFRESH_FLAG || echo "WARN: $SOURCE failed, continuing"
+          done
+
+      - name: Merge all sources
+        run: uv run python -m src.merge
+
+      - name: Run tests
+        run: uv run pytest tests/ -q
+
+      - name: Commit updated data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/raw/ data/interim/ data/processed/ data/interim/unmapped_countries.csv
+          git diff --cached --quiet && echo "No data changes" || \
+            git commit -m "chore: monthly data refresh $(date -u +%Y-%m-%d)"
+
+      - name: Push changes
+        run: git push

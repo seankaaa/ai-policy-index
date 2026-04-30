@@ -44,7 +44,7 @@ class PolicyRow(BaseModel):
     enacted_date: date | None = None
     source_url: str
     source: str
-    raw_text: str | None = None
+    raw_text: str | None = None  # always None — project policy is metadata+URL only
     retrieved_at: datetime
 
     @field_validator("country_iso3")

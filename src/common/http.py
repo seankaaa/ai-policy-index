@@ -19,7 +19,7 @@ from tenacity import (
 
 logger = logging.getLogger(__name__)
 
-USER_AGENT = "AI-Policy-Dataset-Research/0.1 (academic research; contact: researcher@example.com)"
+USER_AGENT = "AI-Policy-Dataset-Research/0.1 (academic research; contact: annase2004@gmail.com)"
 
 RAW_DATA_DIR = Path("data/raw")
 

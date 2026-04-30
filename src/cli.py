@@ -13,6 +13,18 @@ logging.basicConfig(
 
 SOURCES = {
     "oxford_readiness": "src.sources.oxford_readiness",
+    "oecd_ai": "src.sources.oecd_ai",
+    "girai": "src.sources.girai",
+    "stanford_hai": "src.sources.stanford_hai",
+    "aims_survey": "src.sources.aims_survey",
+    "zhang_dafoe_govai": "src.sources.zhang_dafoe_govai",
+    "kelley_8country": "src.sources.kelley_8country",
+    "world_risk_poll": "src.sources.world_risk_poll",
+    "iapp_tracker": "src.sources.iapp_tracker",
+    "pew_research": "src.sources.pew_research",
+    "unesco_ram": "src.sources.unesco_ram",
+    "ipsos_ai_monitor": "src.sources.ipsos_ai_monitor",
+    "local_us_officials": "src.sources.local_us_officials",
 }
 
 
@@ -73,14 +85,48 @@ def cmd_validate(source: str) -> None:
         print(f"Validation OK for {source}")
 
 
+def cmd_merge() -> None:
+    from src.merge import run, summary
+    results = run()
+    print(summary(results))
+
+
+def cmd_run_all(refresh: bool) -> None:
+    for source in SOURCES:
+        print(f"\n=== {source} ===")
+        try:
+            cmd_fetch(source, refresh=refresh)
+            cmd_normalize(source)
+            cmd_validate(source)
+        except SystemExit:
+            print(f"  [WARN] {source} validation failed — continuing")
+        except Exception as e:
+            print(f"  [ERROR] {source}: {e}")
+    print("\n=== MERGE ===")
+    cmd_merge()
+
+
 def main() -> None:
     args = sys.argv[1:]
-    if len(args) < 2:
-        print("Usage: python -m src.cli <fetch|normalize|validate> <source> [--refresh]")
+    if not args:
+        print("Usage: python -m src.cli <fetch|normalize|validate|run|merge|run-all> [source] [--refresh]")
         sys.exit(1)
 
-    command, source = args[0], args[1]
+    command = args[0]
     refresh = "--refresh" in args
+
+    if command == "merge":
+        cmd_merge()
+        return
+    if command == "run-all":
+        cmd_run_all(refresh=refresh)
+        return
+
+    if len(args) < 2:
+        print(f"Usage: python -m src.cli {command} <source> [--refresh]")
+        sys.exit(1)
+
+    source = args[1]
 
     if command == "fetch":
         cmd_fetch(source, refresh=refresh)
