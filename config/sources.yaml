@@ -1,0 +1,129 @@
+sources:
+  oxford_readiness:
+    name: "Oxford Insights Government AI Readiness Index"
+    tier: 1
+    feeds: [indicators]
+    base_url: "https://oxfordinsights.com/ai-readiness/"
+    data_url: "https://oxfordinsights.com/ai-readiness/"
+    license: "Creative Commons (check per edition)"
+    citation: "Oxford Insights. (2023). Government AI Readiness Index 2023. https://oxfordinsights.com/ai-readiness/"
+    notes: "Annual CSV/Excel download; 195 countries, 39 indicators across 3 pillars"
+
+  oecd_ai:
+    name: "OECD.AI Policy Navigator"
+    tier: 1
+    feeds: [policies, indicators]
+    base_url: "https://oecd.ai"
+    api_base: "https://oecd.ai/api"
+    license: "OECD Terms of Service"
+    citation: "OECD. (2025). OECD.AI Policy Navigator [Data set]. https://oecd.ai/dashboards"
+    notes: "Check for JSON endpoints; fall back to scraping country pages"
+
+  girai:
+    name: "Global Index on Responsible AI (GIRAI)"
+    tier: 1
+    feeds: [indicators]
+    base_url: "https://www.global-index.ai/"
+    license: "Open (check site)"
+    citation: "GIRAI. (2024). Global Index on Responsible AI. https://www.global-index.ai/"
+    notes: "138 countries, per-country scorecards"
+
+  stanford_hai:
+    name: "Stanford HAI AI Index"
+    tier: 1
+    feeds: [indicators, public_opinion]
+    base_url: "https://hai.stanford.edu/ai-index/"
+    license: "CC BY-ND 4.0"
+    citation: "Maslej, N., et al. (2024). Artificial Intelligence Index Report 2024. Stanford HAI."
+    notes: "Annual PDF + public data files (xlsx/csv)"
+
+  aims_survey:
+    name: "AIMS Survey (Sentience Institute)"
+    tier: 1
+    feeds: [public_opinion]
+    base_url: "https://osf.io/"
+    license: "Open"
+    citation: "Sentience Institute. AIMS Survey. OSF."
+    notes: "Search OSF for 'AIMS survey'"
+
+  zhang_dafoe_govai:
+    name: "Zhang & Dafoe GovAI 2019"
+    tier: 1
+    feeds: [public_opinion]
+    base_url: "https://osf.io/"
+    license: "Open"
+    citation: "Zhang, B., & Dafoe, A. (2019). Artificial Intelligence: American Attitudes and Trends. OSF."
+    notes: "Replication data on OSF or Harvard Dataverse"
+
+  kelley_8country:
+    name: "Kelley et al. 8-Country AI Perception"
+    tier: 1
+    feeds: [public_opinion]
+    base_url: "https://arxiv.org/abs/2001.00081"
+    license: "Open"
+    citation: "Kelley et al. (2021). arXiv:2001.00081"
+    notes: "Check for replication data on Google Research GitHub"
+
+  world_risk_poll:
+    name: "World Risk Poll (Lloyd's Register Foundation)"
+    tier: 1
+    feeds: [public_opinion]
+    base_url: "https://wrp.lrfoundation.org.uk/"
+    license: "Open (registration may be required)"
+    citation: "Lloyd's Register Foundation. World Risk Poll. https://wrp.lrfoundation.org.uk/"
+    notes: "Open microdata downloads, ~140 countries"
+
+  iapp_tracker:
+    name: "IAPP Global AI Law and Policy Tracker"
+    tier: 2
+    feeds: [policies]
+    base_url: "https://iapp.org/resources/article/global-ai-legislation-tracker/"
+    license: "IAPP Terms (public table only)"
+    citation: "IAPP. (2024). Global AI Law and Policy Tracker. https://iapp.org/resources/article/global-ai-legislation-tracker/"
+    notes: "Scrape public table only; deeper detail requires membership"
+
+  pew_research:
+    name: "Pew Research AI articles"
+    tier: 2
+    feeds: [public_opinion]
+    base_url: "https://www.pewresearch.org/topic/internet-technology/technology-policy-issues/artificial-intelligence/"
+    license: "Free registration for full datasets"
+    citation: "Pew Research Center. Artificial Intelligence. https://www.pewresearch.org/"
+    notes: "Toplines public; full datasets require free registration"
+
+  unesco_ram:
+    name: "UNESCO Readiness Assessment Methodology"
+    tier: 3
+    feeds: [indicators]
+    base_url: "https://www.unesco.org/ethics-ai/en/ram"
+    license: "Open"
+    citation: "UNESCO. (2023). Readiness Assessment Methodology. https://www.unesco.org/ethics-ai/en/ram"
+    notes: "Country reports as PDFs; start with Philippines, Chile, Senegal, Morocco, Brazil"
+
+  ipsos_ai_monitor:
+    name: "Ipsos AI Monitor"
+    tier: 3
+    feeds: [public_opinion]
+    base_url: "https://www.ipsos.com/"
+    license: "Toplines free; microdata commercial"
+    citation: "Ipsos. (2024). AI Monitor. https://www.ipsos.com/"
+    notes: "Extract country-level percentages from published charts/tables"
+
+  local_us_officials:
+    name: "Local US Officials AI Survey"
+    tier: 3
+    feeds: [public_opinion]
+    base_url: "https://arxiv.org/abs/2501.09606"
+    license: "Open"
+    citation: "arXiv:2501.09606"
+    notes: "Extract from supplementary materials"
+
+  eurobarometer:
+    name: "Eurobarometer microdata (GESIS)"
+    tier: 4
+    feeds: [public_opinion]
+    base_url: "https://search.gesis.org/"
+    license: "REQUIRES FREE REGISTRATION + ToS"
+    citation: "European Commission. Eurobarometer. GESIS. https://search.gesis.org/"
+    notes: "Requires registration at GESIS. Do not auto-fetch."
+    access_required: true
