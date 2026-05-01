@@ -162,9 +162,12 @@ export default function HomePage() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white px-6 py-2 flex items-center justify-between">
+      <footer className="border-t border-gray-200 bg-white px-6 py-2 flex items-center justify-between gap-4">
         {currentMeta && <SourceAttribution meta={currentMeta} />}
-        <p className="text-xs text-gray-400">Made by Anna Siamionava</p>
+        <p className="text-xs text-gray-400 text-right shrink-0">
+          Made by Anna Siamionava &middot;{" "}
+          <span className="italic">Early version — societal response data to be expanded</span>
+        </p>
       </footer>
     </main>
   );
