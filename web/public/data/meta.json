@@ -1,5 +1,5 @@
 {
-  "generated_at": "2024-01-01T00:00:00Z",
+  "generated_at": "2026-05-01T21:58:05.786479+00:00",
   "indicators": [
     {
       "id": "oxford_readiness.overall",
@@ -7,12 +7,64 @@
       "description": "Overall Government AI Readiness score from Oxford Insights, combining Government, Technology Sector, and Data & Infrastructure pillars.",
       "unit": "score_0_100",
       "source": "oxford_readiness",
-      "methodology_url": "https://oxfordinsights.com/ai-readiness/",
-      "years_available": [2023],
+      "methodology_url": "https://oxfordinsights.com/ai-readiness/ai-readiness-index/",
+      "years_available": [
+        2023,
+        2024
+      ],
+      "coverage_count": 193,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "oxford_readiness.government_pillar",
+      "name": "Government Pillar",
+      "description": "Government pillar score \u2014 strategic vision, governance, ethics, and digital capacity.",
+      "unit": "score_0_100",
+      "source": "oxford_readiness",
+      "methodology_url": "https://oxfordinsights.com/ai-readiness/ai-readiness-index/",
+      "years_available": [
+        2023,
+        2024
+      ],
+      "coverage_count": 193,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "oxford_readiness.technology_sector_pillar",
+      "name": "Technology Sector Pillar",
+      "description": "Technology sector pillar \u2014 innovation capacity, human capital, business environment.",
+      "unit": "score_0_100",
+      "source": "oxford_readiness",
+      "methodology_url": "https://oxfordinsights.com/ai-readiness/ai-readiness-index/",
+      "years_available": [
+        2023,
+        2024
+      ],
+      "coverage_count": 193,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "oxford_readiness.data_infrastructure_pillar",
+      "name": "Data & Infrastructure Pillar",
+      "description": "Data & infrastructure pillar \u2014 data availability, representativeness, and digital infrastructure.",
+      "unit": "score_0_100",
+      "source": "oxford_readiness",
+      "methodology_url": "https://oxfordinsights.com/ai-readiness/ai-readiness-index/",
+      "years_available": [
+        2023,
+        2024
+      ],
       "coverage_count": 193,
       "scale_type": "sequential"
     }
   ],
-  "years": [2023, 2024, 2025, 2026],
-  "sources": ["oxford_readiness"]
+  "years": [
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "sources": [
+    "oxford_readiness"
+  ]
 }

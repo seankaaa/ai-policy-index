@@ -1,6 +1,6 @@
 source,table,n_rows,n_countries,year_min,year_max,parquet_path,merged_at
-kelley_8country,public_opinion,8,8,2019,2019,data/interim/kelley_8country/public_opinion.parquet,2026-04-30T23:11:41.281055+00:00
-local_us_officials,public_opinion,4,1,2024,2024,data/interim/local_us_officials/public_opinion.parquet,2026-04-30T23:11:41.282104+00:00
-oxford_readiness,indicators,965,193,2023,2023,data/interim/oxford_readiness/indicators.parquet,2026-04-30T23:11:41.283470+00:00
-pew_research,public_opinion,5,1,2022,2023,data/interim/pew_research/public_opinion.parquet,2026-04-30T23:11:41.284619+00:00
-zhang_dafoe_govai,public_opinion,4,1,2019,2019,data/interim/zhang_dafoe_govai/public_opinion.parquet,2026-04-30T23:11:41.285757+00:00
+kelley_8country,public_opinion,8,8,2019,2019,data/interim/kelley_8country/public_opinion.parquet,2026-05-01T21:57:09.357428+00:00
+local_us_officials,public_opinion,4,1,2024,2024,data/interim/local_us_officials/public_opinion.parquet,2026-05-01T21:57:09.359131+00:00
+oxford_readiness,indicators,1717,193,2023,2024,data/interim/oxford_readiness/indicators.parquet,2026-05-01T21:57:09.361145+00:00
+pew_research,public_opinion,5,1,2022,2023,data/interim/pew_research/public_opinion.parquet,2026-05-01T21:57:09.362701+00:00
+zhang_dafoe_govai,public_opinion,4,1,2019,2019,data/interim/zhang_dafoe_govai/public_opinion.parquet,2026-05-01T21:57:09.364157+00:00
