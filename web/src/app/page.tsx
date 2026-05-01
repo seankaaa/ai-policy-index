@@ -47,9 +47,10 @@ export default function HomePage() {
     [meta, selectedIndicatorId]
   );
 
+  // Use all years from meta so 2024–2026 appear in the slider even without data
   const availableYears = useMemo(
-    () => (selectedIndicatorId ? indicatorYears(indicators, selectedIndicatorId) : []),
-    [indicators, selectedIndicatorId]
+    () => meta?.years ?? (selectedIndicatorId ? indicatorYears(indicators, selectedIndicatorId) : []),
+    [meta, indicators, selectedIndicatorId]
   );
 
   const valueMap = useMemo(
@@ -137,6 +138,13 @@ export default function HomePage() {
 
       {/* Map + legend */}
       <div className="relative flex-1 overflow-hidden">
+        {valueMap.size === 0 && !loading && (
+          <div className="absolute inset-x-0 top-3 z-10 flex justify-center">
+            <div className="rounded-full bg-amber-50 border border-amber-200 px-4 py-1 text-xs text-amber-700">
+              No data available for {selectedYear} — countries shown in grey
+            </div>
+          </div>
+        )}
         {currentMeta && (
           <WorldMap
             valueMap={valueMap}
@@ -154,8 +162,9 @@ export default function HomePage() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white px-6 py-2">
+      <footer className="border-t border-gray-200 bg-white px-6 py-2 flex items-center justify-between">
         {currentMeta && <SourceAttribution meta={currentMeta} />}
+        <p className="text-xs text-gray-400">Made by Anna Siamionava</p>
       </footer>
     </main>
   );
