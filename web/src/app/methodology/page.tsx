@@ -8,23 +8,18 @@ export default function MethodologyPage() {
         <h2 className="text-lg font-semibold text-gray-900">Data Sources</h2>
         <ul className="list-disc pl-5 space-y-2">
           <li>
-            <a href="https://oxfordinsights.com/ai-readiness/" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
+            <a href="https://oxfordinsights.com/ai-readiness/ai-readiness-index/" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
               Oxford Insights Government AI Readiness Index
             </a>{" "}
-            — annual readiness scores for 193 countries across Government, Technology
-            Sector, and Data &amp; Infrastructure pillars.
+            — annual readiness scores across Government, Technology Sector, and Data &amp;
+            Infrastructure pillars. 2023: 193 countries; 2024: 188 countries.
           </li>
           <li>
-            <a href="https://oecd.ai/en/dashboards" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
-              OECD.AI Policy Navigator
+            <a href="https://www.ipsos.com/en/ipsos-ai-monitor-2024" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
+              Ipsos AI Monitor 2024
             </a>{" "}
-            — national AI policies, strategies, and initiatives.
-          </li>
-          <li>
-            <a href="https://www.ipsos.com/en/ai-monitor" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
-              Ipsos AI Monitor
-            </a>{" "}
-            — annual public opinion survey across 28 countries.
+            — public opinion survey on AI attitudes across 32 countries, covering nervousness,
+            excitement, expected life impact, and trust in data protection.
           </li>
         </ul>
 
@@ -43,8 +38,8 @@ export default function MethodologyPage() {
         <h2 className="mt-6 text-lg font-semibold text-gray-900">Known Limitations</h2>
         <ul className="list-disc pl-5 space-y-2">
           <li>Coverage varies by indicator; missing data is shown in gray.</li>
-          <li>Oxford Insights 2024 data is partial (26/188 countries).</li>
-          <li>Public opinion data is primarily from high-income countries.</li>
+          <li>Oxford Insights data is not yet available for 2025–2026.</li>
+          <li>Ipsos public opinion data covers 32 countries (primarily high- and upper-middle-income).</li>
         </ul>
 
         <h2 className="mt-6 text-lg font-semibold text-gray-900">Report an Issue</h2>

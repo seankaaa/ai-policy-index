@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-01T21:58:05.786479+00:00",
+  "generated_at": "2026-05-01T22:10:03.572382+00:00",
   "indicators": [
     {
       "id": "oxford_readiness.overall",
@@ -56,6 +56,58 @@
       ],
       "coverage_count": 193,
       "scale_type": "sequential"
+    },
+    {
+      "id": "ipsos.nervous_about_ai",
+      "name": "% Nervous About AI",
+      "description": "Percentage who agree 'products and services using AI make me nervous' (Ipsos AI Monitor 2024, 32 countries).",
+      "unit": "score_0_100",
+      "source": "ipsos_ai_monitor",
+      "methodology_url": "https://www.ipsos.com/en/ipsos-ai-monitor-2024",
+      "years_available": [
+        2024
+      ],
+      "coverage_count": 32,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "ipsos.excited_about_ai",
+      "name": "% Excited About AI",
+      "description": "Percentage who agree 'products and services using AI make me excited' (Ipsos AI Monitor 2024, 32 countries).",
+      "unit": "score_0_100",
+      "source": "ipsos_ai_monitor",
+      "methodology_url": "https://www.ipsos.com/en/ipsos-ai-monitor-2024",
+      "years_available": [
+        2024
+      ],
+      "coverage_count": 32,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "ipsos.ai_will_change_life",
+      "name": "% Expect AI to Change Their Life",
+      "description": "Percentage who think AI will profoundly change their daily life in the next 3-5 years (Ipsos AI Monitor 2024).",
+      "unit": "score_0_100",
+      "source": "ipsos_ai_monitor",
+      "methodology_url": "https://www.ipsos.com/en/ipsos-ai-monitor-2024",
+      "years_available": [
+        2024
+      ],
+      "coverage_count": 32,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "ipsos.trust_data_protection",
+      "name": "% Trust AI Data Protection",
+      "description": "Percentage who trust companies using AI to protect their personal data (Ipsos AI Monitor 2024).",
+      "unit": "score_0_100",
+      "source": "ipsos_ai_monitor",
+      "methodology_url": "https://www.ipsos.com/en/ipsos-ai-monitor-2024",
+      "years_available": [
+        2024
+      ],
+      "coverage_count": 32,
+      "scale_type": "sequential"
     }
   ],
   "years": [
@@ -65,6 +117,7 @@
     2026
   ],
   "sources": [
-    "oxford_readiness"
+    "oxford_readiness",
+    "ipsos_ai_monitor"
   ]
 }
