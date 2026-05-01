@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-01T22:37:08.827518+00:00",
+  "generated_at": "2026-05-01T22:43:28.035639+00:00",
   "indicators": [
     {
       "id": "oxford_readiness.overall",
@@ -187,6 +187,58 @@
       ],
       "coverage_count": 195,
       "scale_type": "sequential"
+    },
+    {
+      "id": "stanford_hai.genai_adoption_rate",
+      "name": "Gen AI Adoption Rate (2025)",
+      "description": "% of population using generative AI tools (Microsoft AI Economy Institute via Stanford HAI 2026 AI Index, H2 2025, top 30 countries).",
+      "unit": "score_0_100",
+      "source": "stanford_hai",
+      "methodology_url": "https://hai.stanford.edu/ai-index/2026-ai-index-report",
+      "years_available": [
+        2025
+      ],
+      "coverage_count": 30,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "stanford_hai.private_ai_investment",
+      "name": "Private AI Investment (2025)",
+      "description": "Private investment in AI companies in 2025 (USD billions). Source: Quid via Stanford HAI 2026 AI Index.",
+      "unit": "usd_billions",
+      "source": "stanford_hai",
+      "methodology_url": "https://hai.stanford.edu/ai-index/2026-ai-index-report",
+      "years_available": [
+        2025
+      ],
+      "coverage_count": 15,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "stanford_hai.ai_job_postings_pct",
+      "name": "AI Job Postings % (2025)",
+      "description": "AI-related job postings as % of all job postings, 2025. Source: Lightcast via Stanford HAI 2026 AI Index.",
+      "unit": "score_0_100",
+      "source": "stanford_hai",
+      "methodology_url": "https://hai.stanford.edu/ai-index/2026-ai-index-report",
+      "years_available": [
+        2025
+      ],
+      "coverage_count": 22,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "stanford_hai.ai_laws_cumulative",
+      "name": "AI Laws Passed (G20, cumulative)",
+      "description": "Cumulative AI-related laws passed 2016\u20132025, G20 countries. Source: Digital Policy Alert via Stanford HAI 2026 AI Index.",
+      "unit": "count",
+      "source": "stanford_hai",
+      "methodology_url": "https://hai.stanford.edu/ai-index/2026-ai-index-report",
+      "years_available": [
+        2025
+      ],
+      "coverage_count": 14,
+      "scale_type": "sequential"
     }
   ],
   "years": [
@@ -197,6 +249,7 @@
   ],
   "sources": [
     "oxford_readiness",
-    "ipsos_ai_monitor"
+    "ipsos_ai_monitor",
+    "stanford_hai"
   ]
 }

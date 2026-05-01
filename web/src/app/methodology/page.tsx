@@ -23,6 +23,14 @@ export default function MethodologyPage() {
             — public opinion survey on AI attitudes across 32 countries, covering nervousness,
             excitement, expected life impact, and trust in data protection.
           </li>
+          <li>
+            <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
+              Stanford HAI 2026 AI Index Report
+            </a>{" "}
+            — country-level data on generative AI adoption (30 countries), private AI investment
+            (15 countries), AI job postings share (22 countries), and cumulative AI laws passed
+            (14 G20 countries), all for 2025.
+          </li>
         </ul>
 
         <h2 className="mt-6 text-lg font-semibold text-gray-900">Country Boundaries</h2>
