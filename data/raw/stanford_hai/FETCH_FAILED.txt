@@ -1,0 +1,3 @@
+Failed at 2026-05-01T21:53:40.410056+00:00
+Download data manually from https://hai.stanford.edu/ai-index/
+or https://github.com/stanford-crfm/AIIndexReport

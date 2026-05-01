@@ -1,0 +1,3 @@
+Failed at 2026-05-01T21:53:49.104040+00:00: Client error '403 Forbidden' for url 'https://www.global-index.ai'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+Visit https://www.global-index.ai to download data manually.
