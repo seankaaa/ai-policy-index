@@ -1,11 +1,9 @@
 import {
   scaleSequential,
   scaleDiverging,
-  scaleThreshold,
 } from "d3-scale";
 import {
-  interpolateBlues,
-  interpolateViridis,
+  interpolateYlOrRd,
   interpolateRdBu,
 } from "d3-scale-chromatic";
 import type { IndicatorMeta } from "@/types/schema";
@@ -31,11 +29,8 @@ export function buildColorScale(
     return (v) => (v == null || !isFinite(v) ? NO_DATA_COLOR : scale(v));
   }
 
-  // Sequential (scores 0-100, counts, etc.)
-  const interpolator =
-    meta.unit === "score_0_100" ? interpolateBlues : interpolateViridis;
-  // Clamp domain slightly so the lightest blue isn't invisible
-  const scale = scaleSequential([min, max], interpolator);
+  // Sequential heat map: yellow (low) → orange → red (high)
+  const scale = scaleSequential([min, max], interpolateYlOrRd);
   return (v) => (v == null || !isFinite(v) ? NO_DATA_COLOR : scale(v));
 }
 
