@@ -11,8 +11,10 @@ export default function MethodologyPage() {
             <a href="https://oxfordinsights.com/ai-readiness/ai-readiness-index/" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
               Oxford Insights Government AI Readiness Index
             </a>{" "}
-            — annual readiness scores across Government, Technology Sector, and Data &amp;
-            Infrastructure pillars. 2023: 193 countries; 2024: 188 countries.
+            — annual readiness scores across pillar dimensions.
+            2023: 193 countries (3 pillars); 2024: 188 countries (3 pillars);
+            2025: 195 countries (6 pillars — Policy Capacity, AI Infrastructure,
+            Governance, Public Sector Adoption, Development &amp; Diffusion, Resilience).
           </li>
           <li>
             <a href="https://www.ipsos.com/en/ipsos-ai-monitor-2024" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
@@ -38,7 +40,8 @@ export default function MethodologyPage() {
         <h2 className="mt-6 text-lg font-semibold text-gray-900">Known Limitations</h2>
         <ul className="list-disc pl-5 space-y-2">
           <li>Coverage varies by indicator; missing data is shown in gray.</li>
-          <li>Oxford Insights data is not yet available for 2025–2026.</li>
+          <li>Oxford Insights 2025 overall scores are approximated from 6 pillar scores weighted by dimension count (mean absolute error ~1.4 points vs. stated values).</li>
+          <li>Oxford Insights data is not yet available for 2026.</li>
           <li>Ipsos public opinion data covers 32 countries (primarily high- and upper-middle-income).</li>
         </ul>
 

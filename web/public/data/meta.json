@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-01T22:10:03.572382+00:00",
+  "generated_at": "2026-05-01T22:37:08.827518+00:00",
   "indicators": [
     {
       "id": "oxford_readiness.overall",
@@ -10,9 +10,10 @@
       "methodology_url": "https://oxfordinsights.com/ai-readiness/ai-readiness-index/",
       "years_available": [
         2023,
-        2024
+        2024,
+        2025
       ],
-      "coverage_count": 193,
+      "coverage_count": 195,
       "scale_type": "sequential"
     },
     {
@@ -107,6 +108,84 @@
         2024
       ],
       "coverage_count": 32,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "oxford_readiness_2025.policy_capacity",
+      "name": "Policy Capacity (2025)",
+      "description": "Policy capacity pillar \u2014 strategic vision, governance frameworks, and digital capacity (2025 index).",
+      "unit": "score_0_100",
+      "source": "oxford_readiness",
+      "methodology_url": "https://oxfordinsights.com/ai-readiness/government-ai-readiness-index-2025/",
+      "years_available": [
+        2025
+      ],
+      "coverage_count": 195,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "oxford_readiness_2025.ai_infrastructure",
+      "name": "AI Infrastructure (2025)",
+      "description": "AI infrastructure pillar \u2014 compute access, connectivity, and digital readiness (2025 index).",
+      "unit": "score_0_100",
+      "source": "oxford_readiness",
+      "methodology_url": "https://oxfordinsights.com/ai-readiness/government-ai-readiness-index-2025/",
+      "years_available": [
+        2025
+      ],
+      "coverage_count": 195,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "oxford_readiness_2025.governance",
+      "name": "Governance (2025)",
+      "description": "Governance pillar \u2014 AI ethics, regulation, and accountability frameworks (2025 index).",
+      "unit": "score_0_100",
+      "source": "oxford_readiness",
+      "methodology_url": "https://oxfordinsights.com/ai-readiness/government-ai-readiness-index-2025/",
+      "years_available": [
+        2025
+      ],
+      "coverage_count": 195,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "oxford_readiness_2025.public_sector_adoption",
+      "name": "Public Sector Adoption (2025)",
+      "description": "Public sector adoption pillar \u2014 AI use in government services (2025 index).",
+      "unit": "score_0_100",
+      "source": "oxford_readiness",
+      "methodology_url": "https://oxfordinsights.com/ai-readiness/government-ai-readiness-index-2025/",
+      "years_available": [
+        2025
+      ],
+      "coverage_count": 195,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "oxford_readiness_2025.development_diffusion",
+      "name": "Development & Diffusion (2025)",
+      "description": "Development & diffusion pillar \u2014 innovation capacity and business AI adoption (2025 index).",
+      "unit": "score_0_100",
+      "source": "oxford_readiness",
+      "methodology_url": "https://oxfordinsights.com/ai-readiness/government-ai-readiness-index-2025/",
+      "years_available": [
+        2025
+      ],
+      "coverage_count": 195,
+      "scale_type": "sequential"
+    },
+    {
+      "id": "oxford_readiness_2025.resilience",
+      "name": "Resilience (2025)",
+      "description": "Resilience pillar \u2014 economic stability, human capital, and societal adaptability (2025 index).",
+      "unit": "score_0_100",
+      "source": "oxford_readiness",
+      "methodology_url": "https://oxfordinsights.com/ai-readiness/government-ai-readiness-index-2025/",
+      "years_available": [
+        2025
+      ],
+      "coverage_count": 195,
       "scale_type": "sequential"
     }
   ],
