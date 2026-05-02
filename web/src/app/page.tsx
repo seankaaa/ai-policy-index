@@ -35,8 +35,10 @@ export default function HomePage() {
         if (metaFile.indicators.length > 0) {
           setSelectedIndicatorId(metaFile.indicators[0].id);
         }
-        const years = metaFile.years;
-        if (years.length > 0) setSelectedYear(years[years.length - 1]);
+        const latestDataYear = Math.max(
+          ...metaFile.indicators.flatMap((ind) => ind.years_available)
+        );
+        setSelectedYear(isFinite(latestDataYear) ? latestDataYear : metaFile.years[metaFile.years.length - 1]);
       })
       .catch((e) => setError(String(e)))
       .finally(() => setLoading(false));
