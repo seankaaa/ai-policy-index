@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "npm run build:data && next build",
+    "build": "next build",
     "build:data": "npx tsx scripts/build-data.ts",
     "start": "next start",
     "lint": "eslint"
