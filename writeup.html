@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Policy Index — Project Write-Up</title>
+  <style>
+    :root {
+      --blue-900: #1e3a5f;
+      --blue-700: #1d4ed8;
+      --blue-500: #3b82f6;
+      --blue-100: #dbeafe;
+      --blue-50:  #eff6ff;
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-500: #6b7280;
+      --gray-300: #d1d5db;
+      --gray-100: #f3f4f6;
+      --gray-50:  #f9fafb;
+      --white:    #ffffff;
+      --accent:   #0ea5e9;
+      --teal:     #0d9488;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Georgia", serif;
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--gray-700);
+      background: var(--white);
+    }
+
+    /* ── Typography ───────────────────────────────────────────────── */
+    h1, h2, h3, h4 { font-family: "Helvetica Neue", "Arial", sans-serif; color: var(--gray-900); }
+
+    /* ── Hero ─────────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue-900) 0%, #0f2942 60%, #0c1f35 100%);
+      color: var(--white);
+      padding: 80px 24px 72px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(59,130,246,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 75% 30%, rgba(14,165,233,0.1) 0%, transparent 50%);
+    }
+    .hero-inner { position: relative; max-width: 760px; margin: 0 auto; }
+    .hero-label {
+      display: inline-block;
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(14,165,233,0.4);
+      border-radius: 100px;
+      padding: 4px 14px;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 19px;
+      color: rgba(255,255,255,0.72);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+    }
+    .hero-meta span {
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+    .hero-meta strong { color: rgba(255,255,255,0.85); }
+
+    /* ── Layout ───────────────────────────────────────────────────── */
+    .page { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Sections ─────────────────────────────────────────────────── */
+    .section { padding: 60px 0; border-bottom: 1px solid var(--gray-100); }
+    .section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .section h2 {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 20px;
+      line-height: 1.25;
+    }
+    .section p { margin-bottom: 16px; }
+    .section p:last-child { margin-bottom: 0; }
+
+    /* ── Lead paragraph ───────────────────────────────────────────── */
+    .lead {
+      font-size: 20px;
+      color: var(--gray-700);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    /* ── Stats row ────────────────────────────────────────────────── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1px;
+      background: var(--gray-300);
+      border: 1px solid var(--gray-300);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 36px 0;
+    }
+    .stat {
+      background: var(--white);
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .stat-number {
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--blue-700);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 12px;
+      color: var(--gray-500);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Pipeline diagram ─────────────────────────────────────────── */
+    .pipeline {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 36px 0;
+      overflow-x: auto;
+    }
+    .pipe-step {
+      flex: 1;
+      min-width: 120px;
+      background: var(--blue-50);
+      border: 1px solid var(--blue-100);
+      border-radius: 10px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+    .pipe-step-icon {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+    .pipe-step-title {
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--blue-900);
+      margin-bottom: 4px;
+    }
+    .pipe-step-sub {
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+    .pipe-arrow {
+      flex-shrink: 0;
+      width: 28px;
+      text-align: center;
+      font-size: 18px;
+      color: var(--gray-300);
+    }
+
+    /* ── Source cards ─────────────────────────────────────────────── */
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 28px 0;
+    }
+    .source-card {
+      border: 1px solid var(--gray-100);
+      border-radius: 10px;
+      padding: 18px;
+      background: var(--gray-50);
+    }
+    .source-card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .source-badge {
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-radius: 100px;
+      padding: 3px 8px;
+    }
+    .badge-readiness { background: #dbeafe; color: #1e40af; }
+    .badge-opinion   { background: #d1fae5; color: #065f46; }
+    .badge-investment{ background: #fef3c7; color: #92400e; }
+    .source-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .source-card p {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ── Feature list ─────────────────────────────────────────────── */
+    .feature-list { list-style: none; padding: 0; margin: 20px 0; }
+    .feature-list li {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--blue-50);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .feature-text h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .feature-text p {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ── Tech stack ───────────────────────────────────────────────── */
+    .tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0;
+    }
+    .tech-tag {
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--gray-300);
+      color: var(--gray-700);
+      background: var(--white);
+    }
+    .tech-tag.lang   { background: #f0fdf4; border-color: #bbf7d0; color: #14532d; }
+    .tech-tag.lib    { background: #eff6ff; border-color: #bfdbfe; color: #1e3a8a; }
+    .tech-tag.infra  { background: #fdf4ff; border-color: #e9d5ff; color: #4c1d95; }
+
+    /* ── Blockquote / callout ─────────────────────────────────────── */
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: var(--blue-50);
+      padding: 18px 22px;
+      border-radius: 0 8px 8px 0;
+      margin: 28px 0;
+    }
+    .callout p {
+      font-style: italic;
+      font-size: 15px;
+      color: var(--gray-700);
+      margin: 0;
+    }
+
+    /* ── Decision table ───────────────────────────────────────────── */
+    .decision-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 20px 0;
+    }
+    .decision-table th {
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--gray-500);
+      text-align: left;
+      padding: 10px 12px;
+      background: var(--gray-50);
+      border-bottom: 2px solid var(--gray-200);
+    }
+    .decision-table td {
+      padding: 12px 12px;
+      vertical-align: top;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .decision-table tr:last-child td { border-bottom: none; }
+    .decision-table td:first-child { font-weight: 600; color: var(--gray-900); }
+
+    /* ── Footer ───────────────────────────────────────────────────── */
+    .footer {
+      background: var(--gray-900);
+      color: var(--gray-500);
+      text-align: center;
+      padding: 40px 24px;
+    }
+    .footer a { color: var(--blue-500); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+    .footer p { font-size: 14px; margin-bottom: 6px; }
+    .footer p:last-child { margin-bottom: 0; }
+
+    /* ── Responsive ───────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .pipeline { flex-direction: column; }
+      .pipe-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Project Write-Up</div>
+    <h1>AI Policy <span>Index</span></h1>
+    <p>
+      A unified open-source dashboard mapping AI governance, readiness scores,
+      and public opinion across 193 countries — built with a full data pipeline
+      and an interactive choropleth visualization.
+    </p>
+    <div class="hero-meta">
+      <span><strong>Role:</strong> Solo — data engineering + front-end</span>
+      <span><strong>Stack:</strong> Python · Next.js · TypeScript</span>
+      <span><strong>Year:</strong> 2025–2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     OVERVIEW
+══════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="section">
+    <div class="section-label">Overview</div>
+    <p class="lead">
+      Global AI policy is moving fast, but the data about it is scattered across
+      academic PDFs, government reports, and paywalled index providers.
+      The AI Policy Index consolidates fourteen sources into one queryable
+      dataset — and surfaces it as a live, interactive world map.
+    </p>
+    <p>
+      The project spans two distinct layers: a Python data pipeline that fetches,
+      normalizes, and validates heterogeneous source data; and a Next.js web
+      application that renders 195 countries as a color-coded choropleth,
+      updated with a year slider and switchable indicators.
+    </p>
+    <p>
+      It was built as a public-interest tool for researchers, journalists,
+      and policy teams who want to understand the global AI governance landscape
+      at a glance — and drill down into a country's position across multiple
+      dimensions without stitching together spreadsheets.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number">195</div>
+        <div class="stat-label">Countries mapped</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">14</div>
+        <div class="stat-label">Data sources</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">18</div>
+        <div class="stat-label">Indicators</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">2023–25</div>
+        <div class="stat-label">Years covered</div>
+      </div>
+    </div>
+  </div>
+
+<!-- ══════════════════════════════════════════════
+     THE PROBLEM
+══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">The Problem</div>
+    <h2>AI governance data is fragmented by design</h2>
+    <p>
+      Every major AI policy dataset lives in its own silo. The Oxford Insights
+      Government AI Readiness Index is published as a pay-to-access PDF with
+      CSV scores behind a form gate. Stanford HAI's AI Index ships as a
+      300-page annual report. Ipsos opinion data comes as formatted press
+      releases. OECD policy records require scraping a JavaScript-heavy portal.
+    </p>
+    <p>
+      This fragmentation imposes a large upfront cost on anyone who wants to
+      ask comparative questions: <em>Which regions have both high AI readiness
+      and low public trust? Which countries passed the most AI laws between
+      2020 and 2025? How does public excitement about AI correlate with
+      government investment?</em>
+    </p>
+    <p>
+      No existing tool answers these questions in one place. The AI Policy Index
+      was built to fill that gap — first as a structured dataset, then as
+      a visualization layer on top.
+    </p>
+
+    <div class="callout">
+      <p>
+        "The goal was not just to display data, but to make data joinable —
+        keyed on ISO 3166-1 alpha-3 country codes and year, so any source
+        can be compared against any other with a single merge."
+      </p>
+    </div>
+  </div>
+
+<!-- ══════════════════════════════════════════════
+     DATA SOURCES
+══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Data Sources</div>
+    <h2>Three categories of evidence, integrated into one schema</h2>
+    <p>
+      Sources were selected for geographic breadth, methodological transparency,
+      and public availability. They fall into three functional categories:
+    </p>
+
+    <div class="source-grid">
+      <div class="source-card">
+        <div class="source-card-top">
+          <span class="source-badge badge-readiness">Readiness</span>
+        </div>
+        <h4>Oxford Insights Government AI Readiness Index</h4>
+        <p>
+          Annual composite score covering government strategy, technology sector
+          capacity, and data infrastructure. Available for 193–195 countries,
+          2023–2025. The 2025 edition restructured into 6 pillars; overall scores
+          were re-derived via dimension-count weighted averaging
+          (mean absolute error vs. stated values: ~1.4 points).
+        </p>
+      </div>
+
+      <div class="source-card">
+        <div class="source-card-top">
+          <span class="source-badge badge-opinion">Opinion</span>
+        </div>
+        <h4>Ipsos AI Monitor 2024</h4>
+        <p>
+          Public opinion survey across 32 countries. Four indicators extracted:
+          nervousness about AI, excitement about AI, expectation that AI will
+          change daily life, and trust in corporate data protection under AI.
+          Coverage skews toward high- and upper-middle-income countries.
+        </p>
+      </div>
+
+      <div class="source-card">
+        <div class="source-card-top">
+          <span class="source-badge badge-investment">Investment</span>
+        </div>
+        <h4>Stanford HAI 2026 AI Index Report</h4>
+        <p>
+          Country-level economic and adoption data for 2025: generative AI adoption
+          rate (30 countries), private AI investment in USD billions (15 countries),
+          AI job postings as share of all job postings (22 countries), and
+          cumulative AI laws passed 2016–2025 across G20 members (14 countries).
+        </p>
+      </div>
+    </div>
+
+    <p>
+      The pipeline is designed to ingest ten additional sources — including
+      the OECD AI Policy Navigator, Global Index on Responsible AI (GIRAI),
+      World Risk Poll, and Pew Research surveys — as data access permits.
+      Each source module follows the same interface: fetch, normalize to a
+      shared Pydantic schema, validate ISO-3 country codes, and emit a
+      per-source Parquet file.
+    </p>
+  </div>
+
+<!-- ══════════════════════════════════════════════
+     DATA PIPELINE
+══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Architecture</div>
+    <h2>A two-tier architecture: pipeline then presentation</h2>
+
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-step-icon">📡</div>
+        <div class="pipe-step-title">Fetch</div>
+        <div class="pipe-step-sub">Rate-limited HTTP, PDF download, CSV scrape</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-step-icon">🔧</div>
+        <div class="pipe-step-title">Normalize</div>
+        <div class="pipe-step-sub">ISO-3 lookup, unit conversion, Pydantic schema</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-step-icon">✅</div>
+        <div class="pipe-step-title">Validate</div>
+        <div class="pipe-step-sub">Row-level type checks, coverage audit</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-step-icon">🔗</div>
+        <div class="pipe-step-title">Merge</div>
+        <div class="pipe-step-sub">Cross-source Parquet tables + wide panel</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="pipe-step-icon">🌍</div>
+        <div class="pipe-step-title">Serve</div>
+        <div class="pipe-step-sub">JSON static files → Next.js choropleth</div>
+      </div>
+    </div>
+
+    <p>
+      <strong>Back-end (Python / uv).</strong> Each data source lives in its
+      own module under <code>src/sources/</code>. Modules are discovered
+      automatically via a source registry in <code>config/sources.yaml</code>
+      and run through a shared CLI: <code>uv run python -m src.cli run-all</code>.
+      Intermediate data is cached as per-source Parquet files in
+      <code>data/interim/</code>; the merge step then joins them into three
+      normalized output tables — <em>indicators</em>, <em>policies</em>, and
+      <em>public_opinion</em> — plus a wide-format country-year panel for
+      regression-ready analysis.
+    </p>
+
+    <p>
+      <strong>Country normalization</strong> is handled centrally via ISO 3166-1
+      alpha-3. Every source uses different country name conventions
+      ("Czechia" vs. "Czech Republic", "USA" vs. "United States"). The
+      <code>common/countries.py</code> module resolves these through
+      <code>pycountry</code> with a hand-curated disambiguation layer for
+      ambiguous cases (Kosovo, Taiwan, Western Sahara).
+    </p>
+
+    <p>
+      <strong>Front-end (Next.js 16 / React 19).</strong> The web application
+      serves pre-built JSON files from <code>public/data/</code> — no server-side
+      database query at render time. The map itself is an SVG rendered from
+      Natural Earth TopoJSON (110m resolution), projected with D3's
+      Equal Earth projection, and colored with a sequential scale computed
+      dynamically from each indicator's value distribution. Clicking any country
+      routes to a per-country detail page. The year slider and indicator
+      picker are controlled components that recompute the color map on
+      every selection change without re-fetching data.
+    </p>
+
+    <div class="tech-row">
+      <span class="tech-tag lang">Python 3.11</span>
+      <span class="tech-tag lang">TypeScript</span>
+      <span class="tech-tag lib">Polars</span>
+      <span class="tech-tag lib">Pydantic</span>
+      <span class="tech-tag lib">pdfplumber</span>
+      <span class="tech-tag lib">Next.js 16</span>
+      <span class="tech-tag lib">React 19</span>
+      <span class="tech-tag lib">D3-geo</span>
+      <span class="tech-tag lib">TopoJSON</span>
+      <span class="tech-tag lib">Tailwind CSS</span>
+      <span class="tech-tag infra">Vercel</span>
+      <span class="tech-tag infra">GitHub Actions</span>
+      <span class="tech-tag infra">uv</span>
+    </div>
+  </div>
+
+<!-- ══════════════════════════════════════════════
+     DESIGN DECISIONS
+══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Design Decisions</div>
+    <h2>Key trade-offs and why they were made</h2>
+
+    <table class="decision-table">
+      <thead>
+        <tr>
+          <th>Decision</th>
+          <th>Alternative considered</th>
+          <th>Rationale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ISO-3 as the universal join key</td>
+          <td>Country name string matching</td>
+          <td>
+            Names vary too much across sources (English vs. French, full vs.
+            abbreviated). ISO-3 codes are stable and machine-verifiable;
+            ambiguous names are caught at normalization time, not silently
+            dropped.
+          </td>
+        </tr>
+        <tr>
+          <td>Static JSON files served from <code>public/</code></td>
+          <td>Database-backed API routes</td>
+          <td>
+            Data updates monthly at most; a static approach eliminates
+            infrastructure cost and latency, keeps the deployment a simple
+            Vercel project, and makes the dataset directly downloadable.
+          </td>
+        </tr>
+        <tr>
+          <td>Equal Earth SVG projection</td>
+          <td>Mercator, Robinson</td>
+          <td>
+            Equal Earth preserves area ratios, avoiding the visual distortion
+            that makes high-latitude countries look disproportionately large —
+            relevant when color-mapping a global policy indicator where
+            small equatorial countries matter as much as large arctic ones.
+          </td>
+        </tr>
+        <tr>
+          <td>Sequential D3 color scale computed from live values</td>
+          <td>Fixed min/max per indicator</td>
+          <td>
+            Fixed scales would make poorly-covered indicators look artificially
+            compressed. A distribution-aware scale (using the actual value
+            spread in the current indicator/year slice) maximizes color contrast
+            across the data that actually exists.
+          </td>
+        </tr>
+        <tr>
+          <td>Per-source Parquet intermediates</td>
+          <td>Direct merge from raw files</td>
+          <td>
+            Caching each source's normalized output lets individual sources be
+            re-fetched and re-validated in isolation without re-running the
+            entire pipeline — essential when one source's upstream changes or
+            breaks.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<!-- ══════════════════════════════════════════════
+     FEATURES
+══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Product Features</div>
+    <h2>What the interface delivers</h2>
+
+    <ul class="feature-list">
+      <li>
+        <div class="feature-icon">🗺️</div>
+        <div class="feature-text">
+          <h4>Interactive choropleth map</h4>
+          <p>
+            195 countries colored by the selected indicator, with hover tooltips
+            showing exact values and source attribution. Countries with no data
+            are shown in a neutral gray with an explicit legend entry.
+            Accessible via keyboard navigation and ARIA labels.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="feature-icon">📅</div>
+        <div class="feature-text">
+          <h4>Year slider with gap awareness</h4>
+          <p>
+            A slider exposes all years for which any indicator has coverage.
+            If the selected indicator has no data for the chosen year, the
+            map blanks gracefully with an amber banner rather than silently
+            displaying stale data. The default year is always the most recent
+            with actual data.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="feature-icon">📊</div>
+        <div class="feature-text">
+          <h4>18 switchable indicators</h4>
+          <p>
+            Grouped by source, spanning government AI readiness (overall +
+            6 pillars), public opinion (nervousness, excitement, life impact,
+            trust), and economic indicators (investment, job postings, adoption
+            rate, AI laws). Each carries metadata — source, methodology URL,
+            description, coverage count — surfaced inline.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="feature-icon">🔗</div>
+        <div class="feature-text">
+          <h4>Country drill-down pages</h4>
+          <p>
+            Clicking any country routes to a dedicated page at
+            <code>/country/[iso3]</code>, designed to show all available
+            indicators for that country across years in one view.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="feature-icon">📖</div>
+        <div class="feature-text">
+          <h4>Methodology transparency</h4>
+          <p>
+            A dedicated methodology page documents each data source, the
+            approximation used for the 2025 Oxford overall score, known
+            limitations (coverage gaps, survey sampling bias), and links
+            to upstream reports. Disputed territories are acknowledged
+            explicitly.
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+<!-- ══════════════════════════════════════════════
+     CHALLENGES
+══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Challenges</div>
+    <h2>What was hard, and how it was resolved</h2>
+
+    <p>
+      <strong>The 2025 Oxford Insights restructure.</strong> Oxford changed
+      its methodology between 2024 and 2025, replacing three pillars with six.
+      The 2025 report publishes pillar scores but not a directly comparable
+      overall score by the same formula as prior years. To maintain a consistent
+      time series, overall scores were approximated by weighting the six pillars
+      by their sub-dimension counts — a defensible but imperfect reconstruction
+      with a mean absolute error of ~1.4 points against values stated in the
+      report. This limitation is documented on the methodology page.
+    </p>
+
+    <p>
+      <strong>Stanford HAI data extraction.</strong> The 2026 AI Index report
+      publishes country-level data as narrative charts without machine-readable
+      downloads. Values for generative AI adoption, private investment, AI job
+      postings, and cumulative AI laws were extracted by reading the report
+      directly and hardcoded as structured records in the pipeline — a tedious
+      but reproducible approach that documents exactly which figure in which
+      chapter each value came from.
+    </p>
+
+    <p>
+      <strong>React 19 peer dependency conflicts.</strong> The
+      <code>@visx/geo</code> visualization library declares a peer dependency
+      on React 16–18; React 19 was released after its last update. Resolving
+      this required a project-level <code>.npmrc</code> with
+      <code>legacy-peer-deps=true</code> for Vercel builds — not ideal, but
+      less disruptive than forking or replacing the library while the upstream
+      adds React 19 support.
+    </p>
+
+    <p>
+      <strong>Vercel deployment routing.</strong> Setting the Vercel root
+      directory to <code>web/</code> did not automatically trigger Next.js
+      framework detection; the platform treated the project as a static site,
+      producing a 9-second build (vs. the 30–60 seconds a real Next.js compile
+      requires) and a 404 on all routes. The fix was adding a
+      <code>vercel.json</code> declaring <code>"framework": "nextjs"</code>,
+      which forces correct framework detection regardless of dashboard settings.
+    </p>
+  </div>
+
+<!-- ══════════════════════════════════════════════
+     WHAT'S NEXT
+══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Roadmap</div>
+    <h2>Where the project is heading</h2>
+    <p>
+      The data pipeline already has stub modules for ten additional sources —
+      OECD AI Policy Navigator, UNESCO Readiness Assessment Methodology,
+      the Global Index on Responsible AI, Eurobarometer, World Risk Poll,
+      and others — waiting on data access or JavaScript-rendering workarounds.
+      As these come online, coverage will deepen from the current 32-country
+      opinion layer to 100+ countries.
+    </p>
+    <p>
+      The front-end roadmap includes the country comparison view (side-by-side
+      radar charts across indicators), a full country profile page with
+      time-series sparklines, and a downloadable CSV export for researchers
+      who want to use the merged dataset directly.
+    </p>
+    <p>
+      A GitHub Actions workflow is configured for monthly refresh on the 30th
+      of each month, keeping the live site current as Oxford Insights, Stanford
+      HAI, and Ipsos publish new editions.
+    </p>
+  </div>
+
+</div><!-- /page -->
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<div class="footer">
+  <p>
+    <strong style="color: #e5e7eb;">AI Policy Index</strong> — built by Anna Siamionava
+  </p>
+  <p>
+    <a href="https://ai-policy-index-hzqsm8cpd-team17-f806bc1b.vercel.app/">Live site</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/seankaaa/ai-policy-index">GitHub repository</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:annase2004@gmail.com">annase2004@gmail.com</a>
+  </p>
+  <p style="margin-top: 12px; font-size: 12px; color: #4b5563;">
+    Data sources: Oxford Insights · Ipsos AI Monitor · Stanford HAI AI Index
+  </p>
+</div>
+
+</body>
+</html>
