@@ -1,0 +1,3 @@
+AIMS Survey data is on OSF. Search https://osf.io for 'AIMS survey Sentience Institute'.
+Download the CSV replication file and place it in this directory.
+Methodology: https://osf.io/preprints/osf/cxu8r
