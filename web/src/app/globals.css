@@ -3,6 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* The UI is designed as a light theme (hardcoded bg-white / text-gray-*),
+     so pin the color scheme to light. This keeps the body and native form
+     controls (e.g. the indicator <select> and its dropdown) from inheriting
+     the OS dark mode, which rendered descriptions as dark text on a dark
+     background. */
+  color-scheme: light;
 }
 
 @theme inline {
@@ -10,13 +16,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
