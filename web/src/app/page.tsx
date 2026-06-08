@@ -102,6 +102,7 @@ export default function HomePage() {
           </p>
         </div>
         <nav className="flex gap-4 text-sm text-gray-600">
+          <a href="/brief" className="hover:text-gray-900">Brief</a>
           <a href="/compare" className="hover:text-gray-900">Compare</a>
           <a href="/methodology" className="hover:text-gray-900">Methodology</a>
           <a
